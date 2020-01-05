@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">EventReporter</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Event Reporter</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_events">Events List</string>
+    <string name="menu_event">Add Event</string>
+    <string name="event_option">Event Fragment</string>
+    <string name="events_option">Events List</string>
+    <string name="map_option">Map Option</string>
+</resources>
