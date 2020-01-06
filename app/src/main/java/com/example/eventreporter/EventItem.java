@@ -7,5 +7,4 @@ public class EventItem {
     public double latitude;
     public String type;
     public int event_id;
-
 }
