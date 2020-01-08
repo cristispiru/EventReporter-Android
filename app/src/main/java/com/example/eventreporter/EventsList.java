@@ -70,6 +70,7 @@ public class EventsList extends Fragment {
                                 eventItem.latitude = ((Number) item.get("latitude")).doubleValue();
                                 eventItem.event_id = (int) item.get("id");
                                 eventItem.type = (String) item.get("alert_code");
+                                LocalStorage.saveToDB(eventItem, getActivity().getApplicationContext());
                                 items.add(eventItem);
                             }
                             Adapter mAdapter = new Adapter(items);
@@ -82,8 +83,10 @@ public class EventsList extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("HttpError", error.toString());
-
+                        Log.d("HttpError", "Getting event from local database");
+                        items = LocalStorage.fetchFromDB(getActivity().getApplicationContext());
+                        Adapter mAdapter = new Adapter(items);
+                        recyclerView.setAdapter(mAdapter);
                     }
                 });
         queue.add(jsonObjectRequest);

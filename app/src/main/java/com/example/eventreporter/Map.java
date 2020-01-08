@@ -30,10 +30,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class Map extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    ArrayList<EventItem> items = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -137,8 +140,16 @@ public class Map extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("HttpError", error.toString());
-
+                        Log.d("HttpError", "Getting event from local database");
+                        items = LocalStorage.fetchFromDB(getActivity().getApplicationContext());
+                        LatLng marker = null;
+                        for (EventItem item : items) {
+                            marker = new LatLng(item.latitude, item.longitude);
+                            googleMap.addMarker(new MarkerOptions().position(marker)
+                                    .title(item.type).snippet(item.description));
+                        }
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(marker).zoom(10).build();
+                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                     }
                 });
         queue.add(jsonObjectRequest);
