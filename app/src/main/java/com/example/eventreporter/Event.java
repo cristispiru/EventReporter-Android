@@ -89,7 +89,7 @@ public class Event extends Fragment {
         }
         RequestQueue queue = (RequestQueue)
                 Volley.newRequestQueue(getView().getContext());
-        String url = "https://21786412.ngrok.io/api/event";
+        String url = getResources().getString(R.string.api_base) +  "/api/event";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>()
                 {
@@ -141,7 +141,7 @@ public class Event extends Fragment {
     public void getAlerts(final View view) {
         final RequestQueue queue = (RequestQueue)
                 Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url = "https://21786412.ngrok.io/api/alert/codes";
+        String url = getResources().getString(R.string.api_base) +  "/api/alert/codes";
 
         final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

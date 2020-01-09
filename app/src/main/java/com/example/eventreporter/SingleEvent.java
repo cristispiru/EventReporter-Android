@@ -27,14 +27,14 @@ public class SingleEvent extends AppCompatActivity {
             Log.d("ReceivedInfo", (String) event.get("description"));
             TextView timestamp = findViewById(R.id.single_event_time);
             TextView description = findViewById(R.id.single_event_description);
-            TextView longitude = findViewById(R.id.single_event_logitude);
+            TextView longitude = findViewById(R.id.single_event_longitude);
             TextView latitude = findViewById(R.id.single_event_latitude);
             TextView type = findViewById(R.id.single_event_type);
-            timestamp.setText("Date: " + (String) event.get("timestamp"));
-            description.setText("Description: " + (String) event.get("description"));
-            longitude.setText("Longitude: " + String.valueOf(event.get("longitude")));
-            latitude.setText("Latitude: " + String.valueOf(event.get("latitude")));
-            type.setText("Event Type: " + (String) event.get("type"));
+            timestamp.setText("Date: " + event.get("timestamp"));
+            description.setText("Description: " + event.get("description"));
+            longitude.setText("Longitude: " + event.get("longitude"));
+            latitude.setText("Latitude: " + event.get("latitude"));
+            type.setText("Event Type: " + event.get("type"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

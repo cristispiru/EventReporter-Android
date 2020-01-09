@@ -42,7 +42,7 @@ public class Map extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.map_fragment, container, false);
 
-        mMapView = (MapView) rootView.findViewById(R.id.mapView);
+        mMapView = rootView.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 
@@ -104,7 +104,7 @@ public class Map extends Fragment {
     public void setMarkers() {
         RequestQueue queue = (RequestQueue)
                 Volley.newRequestQueue(getActivity().getApplicationContext());
-        String url = "https://21786412.ngrok.io/api/event";
+        String url = getResources().getString(R.string.api_base) +  "/api/event";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

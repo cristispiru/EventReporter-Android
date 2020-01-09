@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
-    private ArrayList<EventItem> items=new ArrayList<>();
+    private ArrayList<EventItem> items;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView timestamp;
@@ -24,8 +24,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
         public MyViewHolder(View view) {
             super(view);
-            description = (TextView) view.findViewById(R.id.event_desc);
-            timestamp = (TextView) view.findViewById(R.id.event_time);
+            description = view.findViewById(R.id.event_desc);
+            timestamp = view.findViewById(R.id.event_time);
             context = view.getContext();
             view.setClickable(true);
             view.setOnClickListener(this);

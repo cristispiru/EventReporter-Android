@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/single_event_time" />
 
     <TextView
-        android:id="@+id/single_event_logitude"
+        android:id="@+id/single_event_longitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -47,7 +47,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/single_event_logitude" />
+        app:layout_constraintTop_toBottomOf="@+id/single_event_longitude" />
 
     <TextView
         android:id="@+id/single_event_description"

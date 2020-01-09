@@ -15,4 +15,6 @@
     <string name="events_option">Events List</string>
     <string name="map_option">Map Option</string>
     <string name="event_create">Create Event</string>
+
+    <string name="api_base">https://0c0c85c1.ngrok.io</string>
 </resources>
