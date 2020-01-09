@@ -130,8 +130,10 @@ public class Map extends Fragment {
                                 googleMap.addMarker(new MarkerOptions().position(marker)
                                         .title(eventItem.type).snippet(eventItem.description));
                             }
-                            CameraPosition cameraPosition = new CameraPosition.Builder().target(marker).zoom(10).build();
-                            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                            if (marker != null) {
+                                CameraPosition cameraPosition = new CameraPosition.Builder().target(marker).zoom(10).build();
+                                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -148,8 +150,10 @@ public class Map extends Fragment {
                             googleMap.addMarker(new MarkerOptions().position(marker)
                                     .title(item.type).snippet(item.description));
                         }
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(marker).zoom(10).build();
-                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        if (marker != null) {
+                            CameraPosition cameraPosition = new CameraPosition.Builder().target(marker).zoom(10).build();
+                            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        }
                     }
                 });
         queue.add(jsonObjectRequest);
