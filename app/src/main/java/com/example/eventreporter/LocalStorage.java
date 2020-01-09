@@ -1,5 +1,6 @@
 package com.example.eventreporter;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -45,14 +46,19 @@ public class LocalStorage extends SQLiteOpenHelper {
 
     public static void saveToDB(EventItem item, Context context) {
         SQLiteDatabase database = new LocalStorage(context).getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(LocalStorage.EVENT_COLUMN_DESCRIPTION, item.description);
-        values.put(LocalStorage.EVENT_COLUMN_LATITUDE, item.latitude);
-        values.put(LocalStorage.EVENT_COLUMN_LONGITUDE, item.longitude);
-        values.put(LocalStorage.EVENT_COLUMN_TIMESTAMP, item.timestamp);
-        values.put(LocalStorage.EVENT_COLUMN_TYPE, item.type);
-        values.put(LocalStorage.EVENT_COLUMN_EVENT_ID, item.event_id);
-        long newRowId = database.insert(LocalStorage.EVENT_TABLE_NAME, null, values);
+        @SuppressLint("Recycle") Cursor cursor = database.rawQuery("SELECT * FROM events WHERE timestamp = '"
+                + item.timestamp + "' AND longitude = " + item.longitude + " AND latitude = "
+                + item.latitude, null);
+        if (!cursor.moveToFirst()) {
+            ContentValues values = new ContentValues();
+            values.put(LocalStorage.EVENT_COLUMN_DESCRIPTION, item.description);
+            values.put(LocalStorage.EVENT_COLUMN_LATITUDE, item.latitude);
+            values.put(LocalStorage.EVENT_COLUMN_LONGITUDE, item.longitude);
+            values.put(LocalStorage.EVENT_COLUMN_TIMESTAMP, item.timestamp);
+            values.put(LocalStorage.EVENT_COLUMN_TYPE, item.type);
+            values.put(LocalStorage.EVENT_COLUMN_EVENT_ID, item.event_id);
+            long newRowId = database.insert(LocalStorage.EVENT_TABLE_NAME, null, values);
+        }
     }
 
     public static ArrayList<EventItem> fetchFromDB(Context context) {
