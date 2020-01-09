@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -41,8 +42,8 @@ public class Event extends Fragment {
 
     ArrayList<String> alerts = new ArrayList<>();
     private FusedLocationProviderClient client;
-    double latitude;
-    double longitude;
+    double latitude = 0.0;
+    double longitude = 0.0;
     String name;
     String description;
 
@@ -58,7 +59,6 @@ public class Event extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Add Event");
         requestPermission();
-        getLocation();
         getAlerts(view);
         Button button = view.findViewById(R.id.event_post);
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,6 @@ public class Event extends Fragment {
 
     private void requestPermission() {
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        getLocation();
     }
 
     private void createEvent() {
@@ -86,6 +85,11 @@ public class Event extends Fragment {
         name = alertWrapper.getSelectedItem().toString();
         if (description.length() == 0 || name.length() == 0) {
             Toast toast = Toast.makeText(getView().getContext(), "Complete all fields", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+        if (latitude == 0.0 && longitude == 0.0) {
+            Toast toast = Toast.makeText(getView().getContext(), "Allow location permission", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
@@ -138,6 +142,17 @@ public class Event extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocation();
+            }
+        }
     }
 
     public void getAlerts(final View view) {
