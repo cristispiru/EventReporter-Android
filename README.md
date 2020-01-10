@@ -9,5 +9,4 @@ The app has 4 screens:
 - Event Details: This screen displays all the information regarding an event.
 
 In order to navigate between screens, the application has drawer navigation.
-The REST API is not public, it was implemented locally and made available using ngrok. In order to see the full functionality an android_demo video was added in the bucket.
-
+In order to see the full functionality an android_demo video was added in the bucket.
